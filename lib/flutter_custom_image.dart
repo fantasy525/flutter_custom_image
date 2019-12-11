@@ -50,7 +50,7 @@ NetworkImage;
 /// Returns a [Future] that will complete when the first image yielded by the
 /// [ImageProvider] is available or failed to load.
 ///
-/// If the image is later used by an [FastImage] or [BoxDecoration] or [FadeInImage],
+/// If the image is later used by an [FlutterCustomImage] or [BoxDecoration] or [FadeInImage],
 /// it will probably be loaded faster. The consumer of the image does not need
 /// to use the same [ImageProvider] instance. The [ImageCache] will find the image
 /// as long as both images share the same key.
@@ -66,13 +66,13 @@ NetworkImage;
 ///  * [ImageCache], which holds images that may be reused.
 
 
-/// Signature used by [FastImage.frameBuilder] to control the widget that will be
-/// used when an [FastImage] is built.
+/// Signature used by [FlutterCustomImage.frameBuilder] to control the widget that will be
+/// used when an [FlutterCustomImage] is built.
 ///
 /// The `child` argument contains the default image widget and is guaranteed to
 /// be non-null. Typically, this builder will wrap the `child` widget in some
 /// way and return the wrapped widget. If this builder returns `child` directly,
-/// it will yield the same result as if [FastImage.frameBuilder] was null.
+/// it will yield the same result as if [FlutterCustomImage.frameBuilder] was null.
 ///
 /// The `frame` argument specifies the index of the current image frame being
 /// rendered. It will be null before the first image frame is ready, and zero
@@ -95,10 +95,10 @@ NetworkImage;
 ///
 /// See also:
 ///
-///  * [FastImage.frameBuilder], which makes use of this signature in the [FastImage]
+///  * [FlutterCustomImage.frameBuilder], which makes use of this signature in the [FlutterCustomImage]
 ///    widget.
 
-/// Signature used by [FastImage.loadingBuilder] to build a representation of the
+/// Signature used by [FlutterCustomImage.loadingBuilder] to build a representation of the
 /// image's loading progress.
 ///
 /// This is useful for images that are incrementally loaded (e.g. over a local
@@ -108,7 +108,7 @@ NetworkImage;
 /// The `child` argument contains the default image widget and is guaranteed to
 /// be non-null. Typically, this builder will wrap the `child` widget in some
 /// way and return the wrapped widget. If this builder returns `child` directly,
-/// it will yield the same result as if [FastImage.loadingBuilder] was null.
+/// it will yield the same result as if [FlutterCustomImage.loadingBuilder] was null.
 ///
 /// The `loadingProgress` argument contains the current progress towards loading
 /// the image. This argument will be non-null while the image is loading, but it
@@ -127,7 +127,7 @@ NetworkImage;
 ///
 /// See also:
 ///
-///  * [FastImage.loadingBuilder], which makes use of this signature in the [FastImage]
+///  * [FlutterCustomImage.loadingBuilder], which makes use of this signature in the [FlutterCustomImage]
 ///    widget.
 ///  * [ImageChunkListener], a lower-level signature for listening to raw
 ///    [ImageChunkEvent]s.
@@ -139,17 +139,17 @@ NetworkImage;
 /// specified:
 ///
 ///  * [new Image], for obtaining an image from an [ImageProvider].
-///  * [new FastImage.asset], for obtaining an image from an [AssetBundle]
+///  * [new FlutterCustomImage.asset], for obtaining an image from an [AssetBundle]
 ///    using a key.
-///  * [new FastImage.network], for obtaining an image from a URL.
-///  * [new FastImage.file], for obtaining an image from a [File].
-///  * [new FastImage.memory], for obtaining an image from a [Uint8List].
+///  * [new FlutterCustomImage.network], for obtaining an image from a URL.
+///  * [new FlutterCustomImage.file], for obtaining an image from a [File].
+///  * [new FlutterCustomImage.memory], for obtaining an image from a [Uint8List].
 ///
 /// The following image formats are supported: {@macro flutter.dart:ui.imageFormats}
 ///
 /// To automatically perform pixel-density-aware asset resolution, specify the
 /// image using an [AssetImage] and make sure that a [MaterialApp], [WidgetsApp],
-/// or [MediaQuery] widget exists above the [FastImage] widget in the widget tree.
+/// or [MediaQuery] widget exists above the [FlutterCustomImage] widget in the widget tree.
 ///
 /// The image is painted using [paintImage], which describes the meanings of the
 /// various fields on this class in more detail.
@@ -162,11 +162,11 @@ NetworkImage;
 ///    have an [InkWell] on top of it).
 ///  * [Image](dart-ui/Image-class.html), the class in the [dart:ui] library.
 ///
-class FastImage extends StatefulWidget {
+class FlutterCustomImage extends StatefulWidget {
   /// Creates a widget that displays an image.
   ///
   /// To show an image from the network or from an asset bundle, consider using
-  /// [new FastImage.network] and [new FastImage.asset] respectively.
+  /// [new FlutterCustomImage.network] and [new FlutterCustomImage.asset] respectively.
   ///
   /// The [image], [alignment], [repeat], and [matchTextDirection] arguments
   /// must not be null.
@@ -182,7 +182,7 @@ class FastImage extends StatefulWidget {
   /// [FilterQuality.none] which corresponds to nearest-neighbor.
   ///
   /// If [excludeFromSemantics] is true, then [semanticLabel] will be ignored.
-  const FastImage({
+  const FlutterCustomImage({
     Key key,
     @required this.image,
     this.frameBuilder,
@@ -227,7 +227,7 @@ class FastImage extends StatefulWidget {
   /// [FilterQuality.none] which corresponds to nearest-neighbor.
   ///
   /// If [excludeFromSemantics] is true, then [semanticLabel] will be ignored.
-  FastImage.network(
+  FlutterCustomImage.network(
       String src, {
         Key key,
         double scale = 1.0,
@@ -271,7 +271,7 @@ class FastImage extends StatefulWidget {
   /// [FilterQuality.none] which corresponds to nearest-neighbor.
   ///
   /// If [excludeFromSemantics] is true, then [semanticLabel] will be ignored.
-  FastImage.file(
+  FlutterCustomImage.file(
       File file, {
         Key key,
         double scale = 1.0,
@@ -422,7 +422,7 @@ class FastImage extends StatefulWidget {
   ///    scale is present.
   ///  * <https://flutter.dev/assets-and-images/>, an introduction to assets in
   ///    Flutter.
-  FastImage.asset(
+  FlutterCustomImage.asset(
       String name, {
         Key key,
         AssetBundle bundle,
@@ -466,7 +466,7 @@ class FastImage extends StatefulWidget {
   /// [FilterQuality.none] which corresponds to nearest-neighbor.
   ///
   /// If [excludeFromSemantics] is true, then [semanticLabel] will be ignored.
-  FastImage.memory(
+  FlutterCustomImage.memory(
       Uint8List bytes, {
         Key key,
         double scale = 1.0,
@@ -595,7 +595,7 @@ class FastImage extends StatefulWidget {
   ///
   /// ## Performance implications
   ///
-  /// If a [loadingBuilder] is specified for an image, the [FastImage] widget is
+  /// If a [loadingBuilder] is specified for an image, the [FlutterCustomImage] widget is
   /// likely to be rebuilt on every
   /// [rendering pipeline frame](rendering/RendererBinding/drawFrame.html) until
   /// the image has loaded. This is useful for cases such as displaying a loading
@@ -774,7 +774,7 @@ class FastImage extends StatefulWidget {
   final bool excludeFromSemantics;
 
   @override
-  _FastImageState createState() => _FastImageState();
+  _FlutterCustomImageState createState() => _FlutterCustomImageState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -797,7 +797,7 @@ class FastImage extends StatefulWidget {
   }
 }
 
-class _FastImageState extends State<FastImage> with WidgetsBindingObserver {
+class _FlutterCustomImageState extends State<FlutterCustomImage> with WidgetsBindingObserver {
   ImageStream _imageStream;
   ImageInfo _imageInfo;
   ImageChunkEvent _loadingProgress;
@@ -843,7 +843,7 @@ class _FastImageState extends State<FastImage> with WidgetsBindingObserver {
   }
 
   @override
-  void didUpdateWidget(FastImage oldWidget) {
+  void didUpdateWidget(FlutterCustomImage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (_isListeningToStream &&
         (widget.loadingBuilder == null) != (oldWidget.loadingBuilder == null)) {
