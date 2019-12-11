@@ -1,5 +1,6 @@
 # flutter_custom_image
- 从flutter官方Image修改而来,在didChangeDependencies生命周期中增加了判断ImageProvider是否一致，如果一致就不会再去_resolveImage()
+ 从flutter 1.7.8-hotfix4官方Image修改而来,在didChangeDependencies生命周期中增加了判断ImageProvider是否一致，如果一致就不会再去_resolveImage()
+ 其他地方与官方基本一致
 ```dart
 void didChangeDependencies() {
     ...
